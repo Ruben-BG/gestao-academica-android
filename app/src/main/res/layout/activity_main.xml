@@ -22,7 +22,7 @@
             android:layout_marginTop="30dp"
             android:text="Gestão Acadêmica"
             android:textAlignment="center"
-            android:textColor="@color/white"
+            android:textColor="@color/tituloInicial"
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -48,7 +48,7 @@
 
     <RadioGroup
         android:id="@+id/botaoGrupo"
-        android:layout_width="300dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:baselineAligned="false"
@@ -62,7 +62,6 @@
             android:id="@+id/botaoProfessorAluno"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="25dp"
             android:text="Professor/Aluno"
             android:textSize="16sp" />
 
@@ -85,7 +84,6 @@
         android:inputType="textPersonName"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/botaoGrupo" />
 

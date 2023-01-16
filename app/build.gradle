@@ -30,8 +30,8 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures {//ativar o view binding no projeto android
-        viewBinding true
+    viewBinding {//ativar o view binding no projeto android
+        enabled = true
     }
     buildToolsVersion '33.0.1'
 }
