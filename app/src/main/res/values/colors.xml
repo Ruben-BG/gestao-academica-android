@@ -6,7 +6,10 @@
     <color name="verde_azulado">#04BF9D</color>
     <color name="cinza_claro">#CACACA</color>
     <color name="cinza_escuro">#878787</color>
+
     <color name="tituloInicial">#FFFFFFFF</color>
+    <color name="textoNormal">#FF000000</color>
+    <color name="backgroundSecundario">#F4F4F4</color>
 
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>

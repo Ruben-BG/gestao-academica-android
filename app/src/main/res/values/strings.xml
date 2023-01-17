@@ -1,3 +1,11 @@
 <resources>
+
     <string name="app_name">Gestao Acadêmica</string>
+
+    <string-array name="tipos_usuario">
+        <item>Aluno</item>
+        <item>Professor</item>
+        <item>Coordenador</item>
+    </string-array>
+
 </resources>

@@ -6,14 +6,192 @@
     android:layout_height="match_parent"
     tools:context=".TelaCadastro">
 
-    <TextView
-        android:id="@+id/textView"
+    <ImageView
+        android:id="@+id/botaoVoltarTelaCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Text Demo"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_voltar" />
+
+    <TextView
+        android:id="@+id/textoCriarContaTelaCadastro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Criar Conta"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/textoNormal"
+        android:textSize="26sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toEndOf="@+id/botaoVoltarTelaCadastro"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <view
+        android:id="@+id/viewSeparador1TelaCadastro"
+        class="androidx.appcompat.widget.ActionMenuView"
+        android:layout_width="220dp"
+        android:layout_height="1.2dp"
+        android:background="@color/verde_azulado"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/botaoVoltarTelaCadastro" />
+
+    <TextView
+        android:id="@+id/textoSouTelaCadastro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Sou"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/textoNormal"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewSeparador1TelaCadastro" />
+
+    <Spinner
+        android:id="@+id/spinnerUsuarioTelaCadastro"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textoSouTelaCadastro"
+        app:layout_constraintTop_toBottomOf="@+id/viewSeparador1TelaCadastro" />
+
+    <view
+        android:id="@+id/viewFormularioTelaCadastro"
+        class="androidx.appcompat.widget.ActionMenuView"
+        android:layout_width="335dp"
+        android:layout_height="425dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/shape_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerUsuarioTelaCadastro" />
+
+    <EditText
+        android:id="@+id/campoNomeTelaCadastro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Nome"
+        android:inputType="textPersonName"
+        android:textColor="@color/textoNormal"
+        android:textSize="20sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/viewFormularioTelaCadastro"
+        app:layout_constraintStart_toStartOf="@+id/viewFormularioTelaCadastro"
+        app:layout_constraintTop_toTopOf="@+id/viewFormularioTelaCadastro" />
+
+    <EditText
+        android:id="@+id/campoCPFTelaCadastro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:hint="CPF"
+        android:inputType="textPersonName"
+        android:textColor="@color/textoNormal"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/viewFormularioTelaCadastro"
+        app:layout_constraintStart_toStartOf="@+id/viewFormularioTelaCadastro"
+        app:layout_constraintTop_toBottomOf="@+id/campoNomeTelaCadastro" />
+
+    <EditText
+        android:id="@+id/campoTelefoneTelaCadastro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:hint="Telefone"
+        android:inputType="textPersonName"
+        android:textColor="@color/textoNormal"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/viewFormularioTelaCadastro"
+        app:layout_constraintStart_toStartOf="@+id/viewFormularioTelaCadastro"
+        app:layout_constraintTop_toBottomOf="@+id/campoCPFTelaCadastro" />
+
+    <EditText
+        android:id="@+id/campoEnderecoTelaCadastro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:hint="Endereço"
+        android:inputType="textPersonName"
+        android:textColor="@color/textoNormal"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/viewFormularioTelaCadastro"
+        app:layout_constraintStart_toStartOf="@+id/viewFormularioTelaCadastro"
+        app:layout_constraintTop_toBottomOf="@+id/campoTelefoneTelaCadastro" />
+
+    <EditText
+        android:id="@+id/campoEmailTelaCadastro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:hint="E-mail"
+        android:inputType="textPersonName"
+        android:textColor="@color/textoNormal"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/viewFormularioTelaCadastro"
+        app:layout_constraintStart_toStartOf="@+id/viewFormularioTelaCadastro"
+        app:layout_constraintTop_toBottomOf="@+id/campoEnderecoTelaCadastro" />
+
+    <EditText
+        android:id="@+id/campoSenhaTelaCadastro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:hint="Senha"
+        android:inputType="textPersonName"
+        android:textColor="@color/textoNormal"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/viewFormularioTelaCadastro"
+        app:layout_constraintStart_toStartOf="@+id/viewFormularioTelaCadastro"
+        app:layout_constraintTop_toBottomOf="@+id/campoEmailTelaCadastro" />
+
+    <EditText
+        android:id="@+id/campoNomeUsuarioTelaCadastro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:hint="Nome de usuário"
+        android:inputType="textPersonName"
+        android:textColor="@color/textoNormal"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/viewFormularioTelaCadastro"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="@+id/viewFormularioTelaCadastro"
+        app:layout_constraintTop_toBottomOf="@+id/campoSenhaTelaCadastro"
+        tools:visibility="invisible" />
+
+    <Button
+        android:id="@+id/botaoCriarContaTelaCadastro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="64dp"
+        android:backgroundTint="@color/azul_base"
+        android:padding="12dp"
+        android:text="Criar Conta"
+        android:textAllCaps="true"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
