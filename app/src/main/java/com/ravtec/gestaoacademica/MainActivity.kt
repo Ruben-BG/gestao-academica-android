@@ -14,7 +14,7 @@ import com.ravtec.gestaoacademica.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
-    //private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     private lateinit var radioButtonProfessorAluno: RadioButton
     private lateinit var radioButtonCoordenador: RadioButton
     private lateinit var campoMatricula: EditText
