@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">Gestao Acadêmica</string>
+    <string name="app_name">Gestão Acadêmica</string>
 
     <string-array name="tipos_usuario">
         <item>Aluno</item>
