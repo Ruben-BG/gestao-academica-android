@@ -1,6 +1,7 @@
 package com.ravtec.gestaoacademica
 
 import android.annotation.SuppressLint
+import android.content.ContentValues
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.TypedValue
@@ -14,10 +15,14 @@ import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.text.isDigitsOnly
+import androidx.core.view.isVisible
+import com.ravtec.gestaoacademica.databinding.ActivityMainBinding
+import com.ravtec.gestaoacademica.databinding.ActivityTelaCadastroBinding
 
 class TelaCadastro : AppCompatActivity(), OnClickListener, AdapterView.OnItemSelectedListener {
 
-    private lateinit var botaoVoltar: ImageView
+    private lateinit var binding: ActivityTelaCadastroBinding
+    private val dbHelper = UsuariosDB(this)
     private lateinit var spinnerUsuario: Spinner
     private lateinit var tipoDeUsuario: String
     private lateinit var viewFormulario: View
@@ -28,31 +33,31 @@ class TelaCadastro : AppCompatActivity(), OnClickListener, AdapterView.OnItemSel
     private lateinit var campoEmail: EditText
     private lateinit var campoSenha: EditText
     private lateinit var campoNomeUsuario: EditText
-    private lateinit var botaoCriarConta: Button
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tela_cadastro)
 
-        spinnerUsuario = findViewById(R.id.spinnerUsuarioTelaCadastro)
+        binding = ActivityTelaCadastroBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        spinnerUsuario = binding.spinnerUsuarioTelaCadastro
         val adapter = ArrayAdapter.createFromResource(this, R.array.tipos_usuario, android.R.layout.simple_spinner_item)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerUsuario.adapter = adapter
 
-        botaoVoltar = findViewById(R.id.botaoVoltarTelaCadastro)
-        viewFormulario = findViewById(R.id.viewFormularioTelaCadastro)
-        campoNome = findViewById(R.id.campoNomeTelaCadastro)
-        campoCPF = findViewById(R.id.campoCPFTelaCadastro)
-        campoTelefone = findViewById(R.id.campoTelefoneTelaCadastro)
-        campoEndereco = findViewById(R.id.campoEnderecoTelaCadastro)
-        campoEmail = findViewById(R.id.campoEmailTelaCadastro)
-        campoSenha = findViewById(R.id.campoSenhaTelaCadastro)
-        campoNomeUsuario = findViewById(R.id.campoNomeUsuarioTelaCadastro)
-        botaoCriarConta = findViewById(R.id.botaoCriarContaTelaCadastro)
+        viewFormulario = binding.viewFormularioTelaCadastro
+        campoNome = binding.campoNomeTelaCadastro
+        campoCPF = binding.campoCPFTelaCadastro
+        campoTelefone = binding.campoTelefoneTelaCadastro
+        campoEndereco = binding.campoEnderecoTelaCadastro
+        campoEmail = binding.campoEmailTelaCadastro
+        campoSenha = binding.campoSenhaTelaCadastro
+        campoNomeUsuario = binding.campoNomeUsuarioTelaCadastro
 
-        botaoVoltar.setOnClickListener(this)
-        botaoCriarConta.setOnClickListener(this)
+        binding.botaoVoltarTelaCadastro.setOnClickListener(this)
+        binding.botaoCriarContaTelaCadastro.setOnClickListener(this)
         spinnerUsuario.onItemSelectedListener = this
 
     }
@@ -61,12 +66,37 @@ class TelaCadastro : AppCompatActivity(), OnClickListener, AdapterView.OnItemSel
 
         if (v!!.id == R.id.botaoVoltarTelaCadastro) {
 
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
 
         } else if (v.id == R.id.botaoCriarContaTelaCadastro) {
 
             if (verificarValoresPreenchidos()) {
-                Toast.makeText(this, "Testes realizados deram true.", Toast.LENGTH_SHORT).show()
+
+                if (this::tipoDeUsuario.isInitialized) {
+
+                    val nome = campoNome.text.toString()
+                    val cpf = campoCPF.text.toString()
+                    val email = campoEmail.text.toString()
+                    val senha = campoSenha.text.toString()
+                    val telefone = campoTelefone.text.toString()
+                    val endereco = campoEndereco.text.toString()
+
+                    /*if (tipoDeUsuario == "Aluno") {
+
+                    }
+                    else if (tipoDeUsuario == "Professor") {
+
+                    }
+                    else*/ if (tipoDeUsuario == "Coordenador") {
+
+                        val nomeDeUsuario = campoNomeUsuario.text.toString()
+                        val novoCoordendor = UsuarioCoordenador(nome, cpf, email, senha, telefone, endereco, nomeDeUsuario)
+                        dbHelper.adicionarCoordenador(novoCoordendor)
+
+                    }
+
+                }
+
             }
 
         }
@@ -150,6 +180,12 @@ class TelaCadastro : AppCompatActivity(), OnClickListener, AdapterView.OnItemSel
             else if (campoSenha.text.length < 8) {
                 Toast.makeText(this, "Campo de senha deve conter pelo menos 8 caracteres.", Toast.LENGTH_SHORT).show()
                 campoSenha.requestFocus()
+                return false
+            }
+
+            if (campoNomeUsuario.isVisible && campoNomeUsuario.text.isEmpty()) {
+                Toast.makeText(this, "É obrigatório o preenchimento do campo de nome de usuário.", Toast.LENGTH_SHORT).show()
+                campoNomeUsuario.requestFocus()
                 return false
             }
 

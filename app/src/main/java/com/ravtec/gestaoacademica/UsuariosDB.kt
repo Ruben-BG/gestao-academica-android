@@ -1,5 +1,6 @@
 package com.ravtec.gestaoacademica
 
+import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
@@ -16,6 +17,7 @@ class UsuariosDB(context: Context) : SQLiteOpenHelper(context, "bd_usuarios", nu
         const val COLUMN_NAME_EMAIL = "email"
         const val COLUMN_NAME_SENHA = "senha"
         const val COLUMN_NAME_TELEFONE = "telefone"
+        const val COLUMN_NAME_ENDERECO = "endereco"
         const val COLUMN_NAME_MATRICULA = "matricula"
     }
 
@@ -26,7 +28,8 @@ class UsuariosDB(context: Context) : SQLiteOpenHelper(context, "bd_usuarios", nu
                 "${UsuariosEntry.COLUMN_NAME_CPF} TEXT PRIMARY KEY," +
                 "${UsuariosEntry.COLUMN_NAME_EMAIL} TEXT," +
                 "${UsuariosEntry.COLUMN_NAME_SENHA} TEXT," +
-                "${UsuariosEntry.COLUMN_NAME_TELEFONE} INTEGER," +
+                "${UsuariosEntry.COLUMN_NAME_TELEFONE} TEXT," +
+                "${UsuariosEntry.COLUMN_NAME_ENDERECO} TEXT," +
                 "${UsuariosEntry.COLUMN_NAME_MATRICULA} INTEGER)"
 
     private val SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS usuarios"
@@ -43,6 +46,23 @@ class UsuariosDB(context: Context) : SQLiteOpenHelper(context, "bd_usuarios", nu
 
     override fun onDowngrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         onUpgrade(db, oldVersion, newVersion)
+    }
+
+    fun adicionarCoordenador(usuarioCoordenador: UsuarioCoordenador) {
+
+        val db = this.writableDatabase
+
+        val valores = ContentValues().apply {
+            put(UsuariosEntry.COLUMN_NAME_NOME, usuarioCoordenador.nome)
+            put(UsuariosEntry.COLUMN_NAME_NOMEUSUARIO, usuarioCoordenador.nomeDeUsuario)
+            put(UsuariosEntry.COLUMN_NAME_CPF, usuarioCoordenador.cpf)
+            put(UsuariosEntry.COLUMN_NAME_EMAIL, usuarioCoordenador.email)
+            put(UsuariosEntry.COLUMN_NAME_SENHA, usuarioCoordenador.senha)
+            put(UsuariosEntry.COLUMN_NAME_TELEFONE, usuarioCoordenador.telefone)
+            put(UsuariosEntry.COLUMN_NAME_ENDERECO, usuarioCoordenador.endereco)
+        }
+        db.insert(UsuariosEntry.TABLE_NAME, null, valores)
+
     }
 
 }

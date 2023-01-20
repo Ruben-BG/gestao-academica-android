@@ -15,12 +15,8 @@ import com.ravtec.gestaoacademica.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var radioButtonProfessorAluno: RadioButton
-    private lateinit var radioButtonCoordenador: RadioButton
     private lateinit var campoMatricula: EditText
     private lateinit var campoSenha: EditText
-    private lateinit var botaoEntrar: Button
-    private lateinit var botaoCadastrar: Button
     private val dbHelper = UsuariosDB(this)
 
     @SuppressLint("Recycle")
@@ -28,29 +24,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val db = dbHelper.writableDatabase
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val valores = ContentValues().apply {
-            put(UsuariosDB.UsuariosEntry.COLUMN_NAME_NOME, "Ronaldo Júnior")
-            put(UsuariosDB.UsuariosEntry.COLUMN_NAME_NOMEUSUARIO, "RonaldoC")
-            put(UsuariosDB.UsuariosEntry.COLUMN_NAME_CPF, "12312312312")
-            put(UsuariosDB.UsuariosEntry.COLUMN_NAME_EMAIL, "ronaldoJun@hotmail.com")
-            put(UsuariosDB.UsuariosEntry.COLUMN_NAME_SENHA, "12345678")
-            put(UsuariosDB.UsuariosEntry.COLUMN_NAME_TELEFONE, "1111")
-        }
-        db!!.insert(UsuariosDB.UsuariosEntry.TABLE_NAME, null, valores)
+        val novoCoordenador = UsuarioCoordenador("Ronaldo Júnior", "12312312312", "ronaldoJun@hotmail.com", "12345678", "1111", "", "RonaldoC")
+        dbHelper.adicionarCoordenador(novoCoordenador)
 
-        radioButtonProfessorAluno = findViewById(R.id.botaoProfessorAluno)
-        radioButtonCoordenador = findViewById(R.id.botaoCoordenador)
-        campoMatricula = findViewById(R.id.campoMatriculaNome)
-        campoSenha = findViewById(R.id.campoSenha)
-        botaoEntrar = findViewById(R.id.botaoEntrar)
-        botaoCadastrar = findViewById(R.id.botaoCadastro)
-
-        radioButtonProfessorAluno.setOnClickListener(this)
-        radioButtonCoordenador.setOnClickListener(this)
-        botaoEntrar.setOnClickListener(this)
-        botaoCadastrar.setOnClickListener(this)
+        campoMatricula = binding.campoMatriculaNome
+        campoSenha = binding.campoSenha
+        binding.botaoProfessorAluno.setOnClickListener(this)
+        binding.botaoCoordenador.setOnClickListener(this)
+        binding.botaoEntrar.setOnClickListener(this)
+        binding.botaoCadastro.setOnClickListener(this)
 
     }
 

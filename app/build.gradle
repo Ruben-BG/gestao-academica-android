@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'com.ravtec.gestaoacademica'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.ravtec.gestaoacademica"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -24,14 +24,14 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    viewBinding {//ativar o view binding no projeto android
-        enabled = true
+    buildFeatures { //ativar o view binding no projeto android
+        viewBinding = true
     }
     buildToolsVersion '33.0.1'
 }
