@@ -1,10 +1,12 @@
 package com.ravtec.gestaoacademica
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.provider.BaseColumns
+import androidx.core.database.getIntOrNull
 
 class UsuariosDB(context: Context) : SQLiteOpenHelper(context, "bd_usuarios", null, 3) {
 
@@ -22,7 +24,7 @@ class UsuariosDB(context: Context) : SQLiteOpenHelper(context, "bd_usuarios", nu
     }
 
     private val SQL_CREATE_ENTRIES =
-        "CREATE TABLE ${UsuariosEntry.TABLE_NAME} (" +
+        "CREATE TABLE IF NOT EXISTS ${UsuariosEntry.TABLE_NAME} (" +
                 "${UsuariosEntry.COLUMN_NAME_NOME} TEXT," +
                 "${UsuariosEntry.COLUMN_NAME_NOMEUSUARIO} TEXT," +
                 "${UsuariosEntry.COLUMN_NAME_CPF} TEXT PRIMARY KEY," +
@@ -62,6 +64,69 @@ class UsuariosDB(context: Context) : SQLiteOpenHelper(context, "bd_usuarios", nu
             put(UsuariosEntry.COLUMN_NAME_ENDERECO, usuarioCoordenador.endereco)
         }
         db.insert(UsuariosEntry.TABLE_NAME, null, valores)
+
+    }
+
+    @SuppressLint("Recycle")
+    fun adicionarProfessorAluno(usuario: Usuario) {
+
+        val db = this.writableDatabase
+
+        val cursor = this.readableDatabase.query(
+            UsuariosEntry.TABLE_NAME,
+            arrayOf(UsuariosEntry.COLUMN_NAME_NOME, UsuariosEntry.COLUMN_NAME_EMAIL, UsuariosEntry.COLUMN_NAME_MATRICULA),
+            null,
+            null,
+            null,
+            null,
+            "${UsuariosEntry.COLUMN_NAME_MATRICULA} ASC"
+        )
+
+        var ultimaMatricula = 0
+        with(cursor) {
+            while (moveToNext()) {
+                ultimaMatricula = if (getIntOrNull(getColumnIndexOrThrow(UsuariosEntry.COLUMN_NAME_MATRICULA)) == null) 0 else getInt(getColumnIndexOrThrow(UsuariosEntry.COLUMN_NAME_MATRICULA))
+            }
+        }
+        cursor.close()
+
+        val valores = ContentValues().apply {
+            put(UsuariosEntry.COLUMN_NAME_NOME, usuario.nome)
+            put(UsuariosEntry.COLUMN_NAME_CPF, usuario.cpf)
+            put(UsuariosEntry.COLUMN_NAME_EMAIL, usuario.email)
+            put(UsuariosEntry.COLUMN_NAME_SENHA, usuario.senha)
+            put(UsuariosEntry.COLUMN_NAME_TELEFONE, usuario.telefone)
+            put(UsuariosEntry.COLUMN_NAME_ENDERECO, usuario.endereco)
+            put(UsuariosEntry.COLUMN_NAME_MATRICULA, ultimaMatricula)
+        }
+
+        db.insert(UsuariosEntry.TABLE_NAME, null, valores)
+
+    }
+
+    fun verificarEmailExistente(email: String): Boolean {
+
+        val db = this.readableDatabase
+        val cursor = db.query(
+            UsuariosEntry.TABLE_NAME,
+            arrayOf(UsuariosEntry.COLUMN_NAME_EMAIL),
+            null,
+            null,
+            null,
+            null,
+            "${UsuariosEntry.COLUMN_NAME_EMAIL} ASC"
+        )
+
+        with(cursor) {
+            while (moveToNext()) {
+
+                if (email == getString(getColumnIndexOrThrow(UsuariosEntry.COLUMN_NAME_EMAIL))) return true
+
+            }
+        }
+        cursor.close()
+
+        return false
 
     }
 

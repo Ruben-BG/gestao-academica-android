@@ -81,7 +81,7 @@
         android:duplicateParentState="false"
         android:ems="10"
         android:hint="Digite sua matrícula"
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

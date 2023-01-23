@@ -13,6 +13,13 @@
         android:theme="@style/Theme.GestaoAcadêmica"
         tools:targetApi="31">
         <activity
+            android:name=".DashboardCoordenador"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".TelaCadastro"
             android:exported="false">
             <meta-data

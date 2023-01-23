@@ -81,19 +81,20 @@ class TelaCadastro : AppCompatActivity(), OnClickListener, AdapterView.OnItemSel
                     val telefone = campoTelefone.text.toString()
                     val endereco = campoEndereco.text.toString()
 
-                    /*if (tipoDeUsuario == "Aluno") {
-
-                    }
-                    else if (tipoDeUsuario == "Professor") {
-
-                    }
-                    else*/ if (tipoDeUsuario == "Coordenador") {
+                    if (tipoDeUsuario == "Coordenador") {
 
                         val nomeDeUsuario = campoNomeUsuario.text.toString()
                         val novoCoordendor = UsuarioCoordenador(nome, cpf, email, senha, telefone, endereco, nomeDeUsuario)
                         dbHelper.adicionarCoordenador(novoCoordendor)
 
+                    } else {
+
+                        val novoUsuario = Usuario(nome, cpf, email, senha, telefone, endereco)
+                        dbHelper.adicionarProfessorAluno(novoUsuario)
+
                     }
+
+                    Toast.makeText(this, "Conta criada com sucesso!!!", Toast.LENGTH_SHORT).show()
 
                 }
 
@@ -172,6 +173,11 @@ class TelaCadastro : AppCompatActivity(), OnClickListener, AdapterView.OnItemSel
                 campoEmail.requestFocus()
                 return false
             }
+            else if (dbHelper.verificarEmailExistente(campoEmail.text.toString())) {
+                Toast.makeText(this, "E-mail já cadastrado.", Toast.LENGTH_SHORT).show()
+                campoEmail.requestFocus()
+                return false
+            }
             else if (campoSenha.text.isEmpty()) {
                 Toast.makeText(this, "É obrigatório o preenchimento do campo de senha.", Toast.LENGTH_SHORT).show()
                 campoSenha.requestFocus()
@@ -180,6 +186,10 @@ class TelaCadastro : AppCompatActivity(), OnClickListener, AdapterView.OnItemSel
             else if (campoSenha.text.length < 8) {
                 Toast.makeText(this, "Campo de senha deve conter pelo menos 8 caracteres.", Toast.LENGTH_SHORT).show()
                 campoSenha.requestFocus()
+                return false
+            } else if (tipoDeUsuario == "Professor" && !campoEmail.text.contains("@prof.ce.gov.br")) {
+                Toast.makeText(this, "Coloque o provedor de e-mail correto.", Toast.LENGTH_SHORT).show()
+                campoEmail.requestFocus()
                 return false
             }
 

@@ -6,6 +6,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
@@ -49,6 +50,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         } else if (view.id == R.id.botaoEntrar) {
 
             Toast.makeText(this, "Botão entrar foi pressionado.", Toast.LENGTH_SHORT).show()
+
+        } else if (view.id == R.id.botaoProfessorAluno) {
+
+            campoMatricula.hint = "Digite sua matrícula"
+
+        } else {
+
+            campoMatricula.hint = "Digite seu nome de usuário"
 
         }
 
