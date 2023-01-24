@@ -6,13 +6,73 @@
     android:layout_height="match_parent"
     tools:context=".DashboardCoordenador">
 
+    <View
+        android:id="@+id/viewCabecalhoDashboardCoordenador"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/shape_view_dashboard_coordenador"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Em desenvolvimento"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Dashboard coordenador"
+        android:textAllCaps="true"
+        android:textColor="@color/tituloInicial"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/viewCabecalhoDashboardCoordenador"
+        app:layout_constraintEnd_toEndOf="@+id/viewCabecalhoDashboardCoordenador"
+        app:layout_constraintStart_toStartOf="@+id/viewCabecalhoDashboardCoordenador"
+        app:layout_constraintTop_toTopOf="@+id/viewCabecalhoDashboardCoordenador" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/ripple_effect"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/viewCabecalhoDashboardCoordenador"
+        app:srcCompat="@drawable/ic_voltar" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:text="nome | Coordenador"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/viewCabecalhoDashboardCoordenador" />
+
+    <ImageButton
+        android:id="@+id/imageButton9"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/shape_image_button"
+        android:contentDescription="clique para ir a tabela de professores"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:srcCompat="@drawable/ic_professores" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Professores"
+        android:textColor="@color/textoNormal"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton9"
+        app:layout_constraintStart_toStartOf="@+id/imageButton9"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton9" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

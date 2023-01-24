@@ -74,7 +74,7 @@
     </RadioGroup>
 
     <EditText
-        android:id="@+id/campoMatriculaNome"
+        android:id="@+id/campoMatricula"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -88,6 +88,22 @@
         app:layout_constraintTop_toBottomOf="@+id/botaoGrupo" />
 
     <EditText
+        android:id="@+id/campoNomeUsuario"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:duplicateParentState="false"
+        android:ems="10"
+        android:hint="Digite seu nome de usuário"
+        android:inputType="textPersonName"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/botaoGrupo"
+        tools:visibility="invisible" />
+
+    <EditText
         android:id="@+id/campoSenha"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -98,7 +114,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/campoMatriculaNome" />
+        app:layout_constraintTop_toBottomOf="@+id/campoMatricula" />
 
     <Button
         android:id="@+id/botaoEntrar"

@@ -130,4 +130,54 @@ class UsuariosDB(context: Context) : SQLiteOpenHelper(context, "bd_usuarios", nu
 
     }
 
+    fun autenticarUsuarioCoordenador(nomeDeUsuario: String, senha: String): Boolean {
+
+        val db = this.readableDatabase
+        val cursor = db.query(
+            UsuariosEntry.TABLE_NAME,
+            arrayOf(UsuariosEntry.COLUMN_NAME_NOMEUSUARIO, UsuariosEntry.COLUMN_NAME_SENHA),
+            null,
+            null,
+            null,
+            null,
+            "${UsuariosEntry.COLUMN_NAME_NOMEUSUARIO} ASC"
+        )
+
+        with(cursor) {
+            while (moveToNext()) {
+                if (getString(getColumnIndexOrThrow(UsuariosEntry.COLUMN_NAME_NOMEUSUARIO)) == nomeDeUsuario &&
+                    getString(getColumnIndexOrThrow(UsuariosEntry.COLUMN_NAME_SENHA)) == senha)
+                    return true
+            }
+        }
+        cursor.close()
+        return false
+
+    }
+
+    fun autenticarUsuarioAlunoProfessor(matricula: Int, senha: String): Boolean {
+
+        val db = this.readableDatabase
+        val cursor = db.query(
+            UsuariosEntry.TABLE_NAME,
+            arrayOf(UsuariosEntry.COLUMN_NAME_MATRICULA, UsuariosEntry.COLUMN_NAME_SENHA),
+            null,
+            null,
+            null,
+            null,
+            "${UsuariosEntry.COLUMN_NAME_MATRICULA} ASC"
+        )
+
+        with(cursor) {
+            while (moveToNext()) {
+                if (getInt(getColumnIndexOrThrow(UsuariosEntry.COLUMN_NAME_MATRICULA)) == matricula &&
+                        getString(getColumnIndexOrThrow(UsuariosEntry.COLUMN_NAME_SENHA)) == senha)
+                    return true
+            }
+        }
+        cursor.close()
+        return false
+
+    }
+
 }

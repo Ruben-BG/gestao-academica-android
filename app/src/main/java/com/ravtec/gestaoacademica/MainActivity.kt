@@ -5,18 +5,22 @@ import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.Toast
+import androidx.core.text.isDigitsOnly
+import androidx.core.view.isVisible
 import com.ravtec.gestaoacademica.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var campoMatricula: EditText
+    private lateinit var campoNomeUsuario: EditText
     private lateinit var campoSenha: EditText
     private val dbHelper = UsuariosDB(this)
 
@@ -31,7 +35,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val novoCoordenador = UsuarioCoordenador("Ronaldo Júnior", "12312312312", "ronaldoJun@hotmail.com", "12345678", "1111", "", "RonaldoC")
         dbHelper.adicionarCoordenador(novoCoordenador)
 
-        campoMatricula = binding.campoMatriculaNome
+        campoMatricula = binding.campoMatricula
+        campoNomeUsuario = binding.campoNomeUsuario
         campoSenha = binding.campoSenha
         binding.botaoProfessorAluno.setOnClickListener(this)
         binding.botaoCoordenador.setOnClickListener(this)
@@ -49,18 +54,80 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         } else if (view.id == R.id.botaoEntrar) {
 
-            Toast.makeText(this, "Botão entrar foi pressionado.", Toast.LENGTH_SHORT).show()
+            if (campoNomeUsuario.isVisible) {
+
+                if (verificarCampos()) {
+
+                    if (dbHelper.autenticarUsuarioCoordenador(campoNomeUsuario.text.toString(), campoSenha.text.toString())) {
+                        val navegarDashboardCoordenador = Intent(this, DashboardCoordenador::class.java)
+                        startActivity(navegarDashboardCoordenador)
+                    } else Toast.makeText(this, "Dados inseridos inválidos", Toast.LENGTH_SHORT).show()
+
+                }
+
+            }
+            else if (campoMatricula.isVisible) {
+
+                if (verificarCampos()) {
+
+                    if (dbHelper.autenticarUsuarioAlunoProfessor(campoMatricula.text.toString().toInt(), campoSenha.text.toString())) {
+                        Toast.makeText(this, "Dados inseridos inválidos", Toast.LENGTH_SHORT).show()
+                    } else Toast.makeText(this, "Dados inseridos inválidos", Toast.LENGTH_SHORT).show()
+
+                }
+
+            }
 
         } else if (view.id == R.id.botaoProfessorAluno) {
 
-            campoMatricula.hint = "Digite sua matrícula"
+            campoMatricula.visibility = View.VISIBLE
+            campoNomeUsuario.visibility = View.INVISIBLE
+            apagarCampos()
 
         } else {
 
-            campoMatricula.hint = "Digite seu nome de usuário"
+            campoMatricula.visibility = View.INVISIBLE
+            campoNomeUsuario.visibility = View.VISIBLE
+            apagarCampos()
 
         }
 
+    }
+
+    private fun verificarCampos(): Boolean {
+
+        if (campoMatricula.isVisible) {
+
+            if (campoMatricula.text.isEmpty()) {
+                Toast.makeText(this, "Por favor, preencha o campo de matrícula", Toast.LENGTH_SHORT).show()
+                campoMatricula.requestFocus()
+                return false
+            }
+
+        } else {
+
+            if (campoNomeUsuario.text.isEmpty()) {
+                Toast.makeText(this, "Por favor, preencha o campo de nome de usuário", Toast.LENGTH_SHORT).show()
+                campoNomeUsuario.requestFocus()
+                return false
+            }
+
+        }
+
+        if (campoSenha.text.isEmpty()) {
+            Toast.makeText(this, "Por favor, preencha o campo de senha", Toast.LENGTH_SHORT).show()
+            campoSenha.requestFocus()
+            return false
+        }
+
+        return true
+
+    }
+
+    fun apagarCampos() {
+        campoMatricula.text.clear()
+        campoNomeUsuario.text.clear()
+        campoSenha.text.clear()
     }
 
 }
