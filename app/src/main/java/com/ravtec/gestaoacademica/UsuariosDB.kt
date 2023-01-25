@@ -3,6 +3,7 @@ package com.ravtec.gestaoacademica
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.provider.BaseColumns
@@ -104,32 +105,6 @@ class UsuariosDB(context: Context) : SQLiteOpenHelper(context, "bd_usuarios", nu
 
     }
 
-    fun verificarEmailExistente(email: String): Boolean {
-
-        val db = this.readableDatabase
-        val cursor = db.query(
-            UsuariosEntry.TABLE_NAME,
-            arrayOf(UsuariosEntry.COLUMN_NAME_EMAIL),
-            null,
-            null,
-            null,
-            null,
-            "${UsuariosEntry.COLUMN_NAME_EMAIL} ASC"
-        )
-
-        with(cursor) {
-            while (moveToNext()) {
-
-                if (email == getString(getColumnIndexOrThrow(UsuariosEntry.COLUMN_NAME_EMAIL))) return true
-
-            }
-        }
-        cursor.close()
-
-        return false
-
-    }
-
     fun autenticarUsuarioCoordenador(nomeDeUsuario: String, senha: String): Boolean {
 
         val db = this.readableDatabase
@@ -171,12 +146,102 @@ class UsuariosDB(context: Context) : SQLiteOpenHelper(context, "bd_usuarios", nu
         with(cursor) {
             while (moveToNext()) {
                 if (getInt(getColumnIndexOrThrow(UsuariosEntry.COLUMN_NAME_MATRICULA)) == matricula &&
-                        getString(getColumnIndexOrThrow(UsuariosEntry.COLUMN_NAME_SENHA)) == senha)
+                    getString(getColumnIndexOrThrow(UsuariosEntry.COLUMN_NAME_SENHA)) == senha)
                     return true
             }
         }
         cursor.close()
         return false
+
+    }
+
+    fun verificarEmailExistente(email: String): Boolean {
+
+        val db = this.readableDatabase
+        val cursor = db.query(
+            UsuariosEntry.TABLE_NAME,
+            arrayOf(UsuariosEntry.COLUMN_NAME_EMAIL),
+            null,
+            null,
+            null,
+            null,
+            "${UsuariosEntry.COLUMN_NAME_EMAIL} ASC"
+        )
+
+        with(cursor) {
+            while (moveToNext()) {
+
+                if (email == getString(getColumnIndexOrThrow(UsuariosEntry.COLUMN_NAME_EMAIL))) return true
+
+            }
+        }
+        cursor.close()
+
+        return false
+
+    }
+
+    fun verificarNomeDeUsuarioExistente(nomeDeUsuario: String): Boolean {
+
+        val db = this.readableDatabase
+        val cursor = db.query(
+            UsuariosEntry.TABLE_NAME,
+            arrayOf(UsuariosEntry.COLUMN_NAME_NOMEUSUARIO),
+            null,
+            null,
+            null,
+            null,
+            "${UsuariosEntry.COLUMN_NAME_MATRICULA} ASC"
+        )
+
+        with(cursor) {
+            while (moveToNext()) {
+                if (getString(getColumnIndexOrThrow(UsuariosEntry.COLUMN_NAME_NOMEUSUARIO)) == nomeDeUsuario) return true
+            }
+        }
+        cursor.close()
+
+        return false
+
+    }
+
+    fun pegarUsuarioCoordenador(nomeDeUsuario: String): UsuarioCoordenador {
+
+        val db = this.readableDatabase
+        val cursor = db.query(
+            UsuariosEntry.TABLE_NAME,
+            arrayOf(UsuariosEntry.COLUMN_NAME_NOME, UsuariosEntry.COLUMN_NAME_NOMEUSUARIO, UsuariosEntry.COLUMN_NAME_CPF, UsuariosEntry.COLUMN_NAME_EMAIL, UsuariosEntry.COLUMN_NAME_SENHA, UsuariosEntry.COLUMN_NAME_TELEFONE, UsuariosEntry.COLUMN_NAME_ENDERECO),
+            null,
+            null,
+            null,
+            null,
+            "${UsuariosEntry.COLUMN_NAME_NOMEUSUARIO} ASC"
+        )
+
+        var nome = ""
+        var cpf = ""
+        var email = ""
+        var senha = ""
+        var telefone = ""
+        var endereco = ""
+
+        with(cursor) {
+            while (moveToNext()) {
+
+                if (getString(getColumnIndexOrThrow(UsuariosEntry.COLUMN_NAME_NOMEUSUARIO)) == nomeDeUsuario) {
+                    nome = getString(getColumnIndexOrThrow(UsuariosEntry.COLUMN_NAME_NOME))
+                    cpf = getString(getColumnIndexOrThrow(UsuariosEntry.COLUMN_NAME_CPF))
+                    email = getString(getColumnIndexOrThrow(UsuariosEntry.COLUMN_NAME_EMAIL))
+                    senha = getString(getColumnIndexOrThrow(UsuariosEntry.COLUMN_NAME_SENHA))
+                    telefone = getString(getColumnIndexOrThrow(UsuariosEntry.COLUMN_NAME_TELEFONE))
+                    endereco = getString(getColumnIndexOrThrow(UsuariosEntry.COLUMN_NAME_ENDERECO))
+                }
+
+            }
+        }
+        cursor.close()
+
+        return UsuarioCoordenador(nome, cpf, email, senha, telefone, endereco, nomeDeUsuario)
 
     }
 

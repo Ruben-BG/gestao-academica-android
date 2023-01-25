@@ -193,10 +193,18 @@ class TelaCadastro : AppCompatActivity(), OnClickListener, AdapterView.OnItemSel
                 return false
             }
 
-            if (campoNomeUsuario.isVisible && campoNomeUsuario.text.isEmpty()) {
-                Toast.makeText(this, "É obrigatório o preenchimento do campo de nome de usuário.", Toast.LENGTH_SHORT).show()
-                campoNomeUsuario.requestFocus()
-                return false
+            if (campoNomeUsuario.isVisible) {
+
+                if (campoNomeUsuario.text.isEmpty()) {
+                    Toast.makeText(this, "É obrigatório o preenchimento do campo de nome de usuário.", Toast.LENGTH_SHORT).show()
+                    campoNomeUsuario.requestFocus()
+                    return false
+                } else if (dbHelper.verificarNomeDeUsuarioExistente(campoNomeUsuario.text.toString())) {
+                    Toast.makeText(this, "Nome de usuário já existente na plataforma.", Toast.LENGTH_SHORT).show()
+                    campoNomeUsuario.requestFocus()
+                    return false
+                }
+
             }
 
         }

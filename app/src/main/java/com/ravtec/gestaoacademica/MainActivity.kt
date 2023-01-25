@@ -32,9 +32,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val novoCoordenador = UsuarioCoordenador("Ronaldo Júnior", "12312312312", "ronaldoJun@hotmail.com", "12345678", "1111", "", "RonaldoC")
-        dbHelper.adicionarCoordenador(novoCoordenador)
-
         campoMatricula = binding.campoMatricula
         campoNomeUsuario = binding.campoNomeUsuario
         campoSenha = binding.campoSenha
@@ -60,6 +57,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
                     if (dbHelper.autenticarUsuarioCoordenador(campoNomeUsuario.text.toString(), campoSenha.text.toString())) {
                         val navegarDashboardCoordenador = Intent(this, DashboardCoordenador::class.java)
+                        navegarDashboardCoordenador.putExtra("nomeUsuario", campoNomeUsuario.text.toString())
                         startActivity(navegarDashboardCoordenador)
                     } else Toast.makeText(this, "Dados inseridos inválidos", Toast.LENGTH_SHORT).show()
 

@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textoTituloDashboardCoordenador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Dashboard coordenador"
@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="@+id/viewCabecalhoDashboardCoordenador" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/buttonVoltarDashboardCoordenador"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
@@ -41,7 +41,7 @@
         app:srcCompat="@drawable/ic_voltar" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textoInformesDashboardCoordenador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
@@ -49,30 +49,99 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/buttonVoltarDashboardCoordenador"
         app:layout_constraintTop_toBottomOf="@+id/viewCabecalhoDashboardCoordenador" />
 
     <ImageButton
-        android:id="@+id/imageButton9"
+        android:id="@+id/imageProfessoresDashboardCoordenador"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/shape_image_button"
         android:contentDescription="clique para ir a tabela de professores"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/buttonVoltarDashboardCoordenador"
         app:srcCompat="@drawable/ic_professores" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textoProfessoresDashboardCoordenador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Professores"
         android:textColor="@color/textoNormal"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton9"
-        app:layout_constraintStart_toStartOf="@+id/imageButton9"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton9" />
+        app:layout_constraintEnd_toEndOf="@+id/imageProfessoresDashboardCoordenador"
+        app:layout_constraintStart_toStartOf="@+id/imageProfessoresDashboardCoordenador"
+        app:layout_constraintTop_toBottomOf="@+id/imageProfessoresDashboardCoordenador" />
+
+    <ImageButton
+        android:id="@+id/imageTurmasDashboardCoordenador"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/shape_image_button"
+        android:contentDescription="clique para ir a tabela de turmas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonVoltarDashboardCoordenador"
+        app:srcCompat="@drawable/ic_turma" />
+
+    <TextView
+        android:id="@+id/textoTurmasDashboardCoordenador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Turmas"
+        android:textColor="@color/textoNormal"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageTurmasDashboardCoordenador"
+        app:layout_constraintStart_toStartOf="@+id/imageTurmasDashboardCoordenador"
+        app:layout_constraintTop_toBottomOf="@+id/imageTurmasDashboardCoordenador" />
+
+    <ImageButton
+        android:id="@+id/imageAlunosDashboardCoordenador"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/shape_image_button"
+        android:contentDescription="clique para ir a tabela de alunos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textoProfessoresDashboardCoordenador"
+        app:srcCompat="@drawable/ic_aluno" />
+
+    <TextView
+        android:id="@+id/textoAlunosDashboardCoordenador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Alunos"
+        android:textColor="@color/textoNormal"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageAlunosDashboardCoordenador"
+        app:layout_constraintStart_toStartOf="@+id/imageAlunosDashboardCoordenador"
+        app:layout_constraintTop_toBottomOf="@+id/imageAlunosDashboardCoordenador" />
+
+    <ImageButton
+        android:id="@+id/imageSolicitacoesDashboardCoordenador"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/shape_image_button"
+        android:contentDescription="clique para ir a tabela de solicitações"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textoTurmasDashboardCoordenador"
+        app:srcCompat="@drawable/ic_solicitacao" />
+
+    <TextView
+        android:id="@+id/textoSolicitacoesDashboardCoordenador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Solicitações"
+        android:textColor="@color/textoNormal"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageSolicitacoesDashboardCoordenador"
+        app:layout_constraintStart_toStartOf="@+id/imageSolicitacoesDashboardCoordenador"
+        app:layout_constraintTop_toBottomOf="@+id/imageSolicitacoesDashboardCoordenador" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
