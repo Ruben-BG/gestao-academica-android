@@ -7,6 +7,7 @@
     <color name="textoNormal">#FFFFFFFF</color>
     <color name="backgroundPrimario">#121212</color>
     <color name="backgroundSecundario">#1B1B1B</color>
+    <color name="backgroundVermelho">#BF1553</color>
     <color name="ripple_effect">#2B2B2B</color>
     <color name="background_image_button">@color/verde_base</color>
     <color name="ripple_effect_image_button">#049797</color>
